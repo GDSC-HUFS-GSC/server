@@ -1,11 +1,15 @@
 package solution.server.item.model;
 
+import static jakarta.persistence.FetchType.LAZY;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +35,9 @@ public class Item extends BaseTimeEntity {
     @Column(name = "item_name", unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Type> types = new ArrayList<>();
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "type_id")
+    private Type type;
 
     public Item(String barCode, String name) {
         this.barCode = barCode;
