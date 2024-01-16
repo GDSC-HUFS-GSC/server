@@ -1,5 +1,5 @@
 #!/bin/bash
-LOG_FILE="/home/ubuntu/work/application.log"
+LOG_FILE="/home/tragle99/work/application.log"
 
 echo "start Build!"
 ./gradlew build
