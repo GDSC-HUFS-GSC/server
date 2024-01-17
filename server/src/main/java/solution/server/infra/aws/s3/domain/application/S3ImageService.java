@@ -1,4 +1,4 @@
-package solution.server.infra.gcp.s3.domain.application;
+package solution.server.infra.aws.s3.domain.application;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import solution.server.global.file.domain.application.ImageFileHandle;
 import solution.server.global.file.domain.application.ImageFileNameUtil;
 import solution.server.global.file.domain.model.ImageFile;
-import solution.server.infra.gcp.s3.domain.model.S3Image;
+import solution.server.infra.aws.s3.domain.model.S3Image;
 
 
 @Service

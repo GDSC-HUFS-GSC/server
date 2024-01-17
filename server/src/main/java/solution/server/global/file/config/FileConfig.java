@@ -3,7 +3,7 @@ package solution.server.global.file.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import solution.server.global.file.domain.application.ImageFileHandle;
-import solution.server.infra.gcp.s3.domain.application.S3ImageService;
+import solution.server.infra.aws.s3.domain.application.S3ImageService;
 
 @Configuration
 public class FileConfig {
