@@ -1,4 +1,4 @@
-package solution.server.infra.gcp.s3.config;
+package solution.server.infra.aws.s3.config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

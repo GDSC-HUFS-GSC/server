@@ -1,4 +1,4 @@
-package solution.server.infra.gcp.s3.domain.model;
+package solution.server.infra.aws.s3.domain.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
