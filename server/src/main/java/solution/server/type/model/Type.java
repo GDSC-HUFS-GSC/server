@@ -1,16 +1,44 @@
 package solution.server.type.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
+import solution.server.category.model.Category;
+import solution.server.recycle.model.Recycle;
+import solution.server.tag.model.Tag;
 
+import static jakarta.persistence.FetchType.LAZY;
+
+@Getter
+@Setter
 @Entity
 public class Type {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "type_id")
     private Long id;
+
+    @NotEmpty
+    @Column(name = "type_name", unique = true)
+    private String name;
+
+    @Column(name = "type_image_url")
+    private String img;
+
+    @Column(name = "how")
+    private String how;
+
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "recycle_id")
+    private Recycle recycle;
+
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "tag_id")
+    private Tag tag;
 
 }
