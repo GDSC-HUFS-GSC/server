@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
+import solution.server.typetag.model.TypeTag;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,4 +21,7 @@ public class Tag {
     @NotEmpty
     @Column(name = "tag_name", unique = true)
     private String name;
+
+    @OneToMany(mappedBy = "tag", cascade = CascadeType.PERSIST)
+    private List<TypeTag> typeTag = new ArrayList<>();
 }
