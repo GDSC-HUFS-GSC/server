@@ -42,7 +42,7 @@ public class GCPStorageService implements ImageFileHandle {
     @Override
     public ImageFile uploadImageFile(MultipartFile file, String folderName) {
         String fileUrl = sendImageFileToGCP(file, folderName).toString();
-        String fileName = imageFileNameUtil.cutFullFileUrlIntoNameOnly(fileUrl);
+        String fileName = imageFileNameUtil.cutFullFileUrlIntoNameOnlyGCP(fileUrl);
         return new GCPStorageFile(file, fileName, folderName);
     }
 

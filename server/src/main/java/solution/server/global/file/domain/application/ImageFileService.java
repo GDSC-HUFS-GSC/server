@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import solution.server.global.file.dto.ImageDtos.ImageDto;
 
-
 @Service
 public class ImageFileService {
 
@@ -25,6 +24,5 @@ public class ImageFileService {
     public void deleteImage(String fileName,String folderName) {
         imageFileHandle.deleteImage(fileName,folderName);
     }
-
 
 }

@@ -59,6 +59,9 @@ spring:
   sql:
     init:
       mode: ${SQL_INIT_MODE}
+  servlet:
+    multipart.max-file-size: 10GB
+    multipart.max-request-size: 10GB
 
 #  metrics:
 #    enabled: true  # HikariCP 메트릭스 활성화

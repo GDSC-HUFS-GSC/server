@@ -19,7 +19,7 @@ import solution.server.global.file.dto.ImageDtos.ImageDto;
 
 
 @RestController
-@RequestMapping("/file")
+@RequestMapping("/v1/file")
 @AllArgsConstructor
 public class GlobalImageApi {
 
