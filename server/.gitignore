@@ -39,7 +39,7 @@ out/
 
 ### applicationsyml ###
 src/main/resources/application-credentials.yml
-
+src/main/resources/tragle-gcp-info.json
 ### MAC OS ###
 *.DS_Store
 ~/*.DS_Store
