@@ -6,7 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 import solution.server.category.model.Category;
 import solution.server.recycle.model.Recycle;
-import solution.server.tag.model.Tag;
+import solution.server.typetag.model.TypeTag;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static jakarta.persistence.FetchType.LAZY;
 
@@ -37,8 +40,7 @@ public class Type {
     @JoinColumn(name = "recycle_id")
     private Recycle recycle;
 
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "tag_id")
-    private Tag tag;
+    @OneToMany(mappedBy = "type", cascade = CascadeType.PERSIST)
+    private List<TypeTag> typeTag = new ArrayList<>();
 
 }
