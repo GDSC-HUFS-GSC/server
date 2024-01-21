@@ -1,19 +1,31 @@
 package solution.server.recycle.dto;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import solution.server.recycle.model.Recycle;
 
 public class RecycleDtos {
 
     @Getter
     public static class RecycleResponseDto {
-        private String RecycleName;
-        private String RecycleImageUrl;
-        public RecycleResponseDto(Recycle recycle){
-            this.RecycleName = recycle.getName();
-            this.RecycleImageUrl = recycle.getImg();
+        private final Long id;
+        private final String name;
+        private final String imageUrl;
+        public RecycleResponseDto(Recycle recycle) {
+            this.id = recycle.getId();
+            this.name = recycle.getName();
+            this.imageUrl = recycle.getImageUrl();
         }
+    }
+    @Getter
+    public static class RecycleRequestDto {
+        private String name;
+        private String imageUrl;
+        public Recycle toEntity() {
+            return new Recycle(name,imageUrl);
+        }
+    }
+    @Getter
+    public static class RecycleUpdateNameRequestDto {
+        private String name;
     }
 }
