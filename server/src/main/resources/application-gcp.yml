@@ -1,0 +1,6 @@
+#appplication-gcp.yml
+cloud:
+  gcp:
+    storage:
+      project-id: ${GCP_STORAGE_PID}
+      bucket: ${GCP_STORAGE_BUCKET_ID}

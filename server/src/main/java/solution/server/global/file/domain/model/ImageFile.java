@@ -1,6 +1,7 @@
 package solution.server.global.file.domain.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
 import lombok.Getter;
@@ -12,8 +13,11 @@ import solution.server.global.file.dto.ImageDtos.ImageDto;
 @Getter
 @NoArgsConstructor
 public class ImageFile {
+
+    @GeneratedValue
     @Id
     Long id;
+
     @Transient
     protected MultipartFile file; // not in database
     protected String fileName;

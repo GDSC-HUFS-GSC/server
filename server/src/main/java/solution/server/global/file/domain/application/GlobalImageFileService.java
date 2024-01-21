@@ -2,6 +2,7 @@ package solution.server.global.file.domain.application;
 
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,11 +13,12 @@ import solution.server.global.file.infrastructure.GlobalImageRepository;
 
 @Transactional
 @Service
+@RequiredArgsConstructor
 public class GlobalImageFileService {
 
-    GlobalImageRepository globalImageRepository;
+    private final GlobalImageRepository globalImageRepository;
 
-   ImageFileService imageFileService;
+    private final ImageFileService imageFileService;
 
     @Transactional(readOnly = true)
     public ImageDto getGlobalImageFileById(Long id) {
