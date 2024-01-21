@@ -28,27 +28,25 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-configuration-processor'
 	implementation group: 'jakarta.ws.rs', name: 'jakarta.ws.rs-api', version: '3.0.0-M1'
 
-	/**jwt */
-	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
-	testImplementation 'org.projectlombok:lombok:1.18.26'
-	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
-	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
-
 	implementation 'com.google.api-client:google-api-client:1.30.10'
-
 	/**test */
 	implementation group: 'org.jeasy', name: 'easy-random-core', version: '5.0.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'com.tngtech.archunit:archunit-junit5:1.1.0'
+	testImplementation 'org.projectlombok:lombok:1.18.26'
+
+	/**jwt */
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 
 	/**DB */
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
-	/**Redis*/
-	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-
 	/**Cloud */
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-gcp-starter', version: '1.2.5.RELEASE'
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-gcp-storage', version: '1.2.5.RELEASE'
 
 	/**Docs */
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'

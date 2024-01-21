@@ -17,6 +17,7 @@ spring:
       - credentials
       - jwt
       - oauth
+      - gcp
 
   cache:
     type: redis
