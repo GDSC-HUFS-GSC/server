@@ -1,43 +1,44 @@
 package solution.server.recycle.application;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import solution.server.item.model.Item;
 import solution.server.recycle.model.Recycle;
 import solution.server.recycle.repository.RecycleRepository;
 
 import java.util.List;
-
-@Service
 @Transactional
+@Service
+@RequiredArgsConstructor
 public class RecycleService {
-
-
-    private RecycleRepository recycleRepository;
-
-    //분류 등록
-    public Long addNewRecycle(String name){
-        Recycle recycle = new Recycle();
-        recycle.setName(name);
+    private final RecycleRepository recycleRepository;
+    public Recycle addNewRecycle(Recycle recycle) {
         recycleRepository.save(recycle);
-        return recycle.getId();
+        return recycle;
     }
-
-    // 모든 분류 조회
-    public List<Recycle> getAllRecycles(){ return recycleRepository.findAll();}
-
-    // 분류 수정
-    public Long changeRecycle(String nameOriginal, String nameNew){
-        Recycle recycle = recycleRepository.findByName(nameOriginal);
-        recycle.setName(nameNew);
+    public List<Recycle> getAllRecycles() {
+        return recycleRepository.findAll();
+    }
+    public Recycle getRecycleByName(String name) {
+        return recycleRepository.findByName(name);
+    }
+    public Recycle getRecycleById(Long id) {
+        return recycleRepository.findById(id).orElseThrow(()->new IllegalArgumentException("[Error]"));
+    }
+    public Recycle updateImageUrl(Long recycleId, String imageUrl) {
+        Recycle recycle = getRecycleById(recycleId);
+        recycle.updateImageUrl(imageUrl);
+        return recycle;
+    }
+    public Recycle updateRecycleName(Long recycleId, String newName) {
+        Recycle recycle = getRecycleById(recycleId);
+        recycle.updateName(newName);
         recycleRepository.save(recycle);
-        return recycle.getId();
+        return recycle;
     }
-
-    // 분류 삭제
-    public Long deleteRecycle(String name){
-        Recycle recycle = recycleRepository.findByName(name);
+    public void deleteRecycle(String name) {
+        Recycle recycle = getRecycleByName(name);
         recycleRepository.delete(recycle);
-        return recycle.getId();
     }
 }

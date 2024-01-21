@@ -1,6 +1,5 @@
 package solution.server.item.presentation;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
