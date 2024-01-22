@@ -32,7 +32,7 @@ public class CategoryController {
         return ApiResponse.success(new CategoryResponseDto(categoryService.addNewCategory(request.toEntity())));
     }
 
-    @PutMapping(value = "image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PutMapping(value = "/image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ApiResponse<CategoryResponseDto> updateCategoryImageUrl(@RequestParam("categoryId") Long categoryId, @RequestParam("file")MultipartFile file){
         String imageUrl = imageFileService.uploadImageFile(file, "Recycle");
         var category = categoryService.updateImageUrl(categoryId, imageUrl);
