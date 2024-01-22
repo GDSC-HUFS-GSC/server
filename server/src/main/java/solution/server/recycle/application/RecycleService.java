@@ -29,6 +29,7 @@ public class RecycleService {
     public Recycle updateImageUrl(Long recycleId, String imageUrl) {
         Recycle recycle = getRecycleById(recycleId);
         recycle.updateImageUrl(imageUrl);
+        //recycleRepository.save(recycle);
         return recycle;
     }
     public Recycle updateRecycleName(Long recycleId, String newName) {
