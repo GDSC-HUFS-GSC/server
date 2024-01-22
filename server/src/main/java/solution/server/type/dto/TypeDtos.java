@@ -7,7 +7,7 @@ import solution.server.type.model.Type;
 
 public class TypeDtos {
 
-    @Getter
+/*    @Getter
     public static class TypeResponseDto{
         private String typeName;
         private String categoryName;
@@ -23,5 +23,5 @@ public class TypeDtos {
             this.typeHow = type.getHow();
             this.typeImageUrl = type.getImg();
         }
-    }
+    }*/
 }
