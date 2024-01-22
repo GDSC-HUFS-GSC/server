@@ -1,4 +1,4 @@
-package solution.server.infra.gcp.api;
+package solution.server.infra.gcp.presentation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
