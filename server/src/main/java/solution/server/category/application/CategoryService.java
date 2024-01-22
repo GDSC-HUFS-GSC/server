@@ -1,6 +1,6 @@
 package solution.server.category.application;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import solution.server.category.model.Category;
@@ -8,36 +8,47 @@ import solution.server.category.repository.CategoryRepository;
 
 import java.util.List;
 
-@Service
 @Transactional
+@Service
+@RequiredArgsConstructor
 public class CategoryService {
-
-
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     // 카테고리 등록
-    public Long addNewCategory(String name){
-        Category category = new Category();
-        category.setName(name);
+    public Category addNewCategory(Category category){
         categoryRepository.save(category);
-        return category.getId();
+        return category;
     }
 
     // 모든 카테고리 조회
-    public List<Category> getAllCategories(){ return categoryRepository.findAll();}
+    public List<Category> getAllCategories() { return categoryRepository.findAll();}
 
-    // 카테고리 수정
-    public Long changeCategory(String nameOriginal, String nameNew){
-        Category category = categoryRepository.findByName(nameOriginal);
-        category.setName(nameNew);
-        categoryRepository.save(category);
-        return category.getId();
+    // 이름으로 카테고리 조회
+    public Category getCategoryByName(String name) { return categoryRepository.findByName(name);}
+
+    // 아이디로 카테고리 조회
+    public Category getCategoryById(Long id) {
+        return categoryRepository.findById(id).orElseThrow(()->new IllegalArgumentException("[Error]"));
     }
 
-    // 카테고리 삭제
-    public Long deleteCategory(String name){
-        Category category = categoryRepository.findByName(name);
+    // 카테고리 이미지 변경
+    public Category updateImageUrl(Long categoryId, String imageUrl){
+        Category category = getCategoryById(categoryId);
+        category.updateImageUrl(imageUrl);
+        //categoryRepository.save(category);
+        return category;
+    }
+
+    // 카테고리 이름 변경
+    public Category updateCategoryName(Long categoryId, String newName){
+        Category category = getCategoryById(categoryId);
+        category.updateName(newName);
+        categoryRepository.save(category);
+        return category;
+    }
+
+    public void deleteCategory(String name){
+        Category category = getCategoryByName(name);
         categoryRepository.delete(category);
-        return category.getId();
     }
 }
