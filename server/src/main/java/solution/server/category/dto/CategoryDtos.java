@@ -1,19 +1,32 @@
 package solution.server.category.dto;
 
+
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import solution.server.category.model.Category;
 
 public class CategoryDtos {
 
     @Getter
     public static class CategoryResponseDto {
-        private String CategoryName;
-        private String CategoryImageUrl;
+        private final Long id;
+        private final String name;
+        private final String imageUrl;
         public CategoryResponseDto(Category category){
-            this.CategoryName = category.getName();
-            this.CategoryImageUrl = category.getImg();
+            this.id = category.getId();
+            this.name = category.getName();
+            this.imageUrl = category.getImageUrl();
         }
+    }
+
+    @Getter
+    public static class CategoryRequestDto {
+        private String name;
+        private String imageUrl;
+        public Category toEntity() { return new Category(name,imageUrl);}
+    }
+
+    @Getter
+    public static class CategoryUpdateNameRequestDto{
+        private String name;
     }
 }
