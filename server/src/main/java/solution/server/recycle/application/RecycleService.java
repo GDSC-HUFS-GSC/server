@@ -3,7 +3,6 @@ package solution.server.recycle.application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import solution.server.item.model.Item;
 import solution.server.recycle.model.Recycle;
 import solution.server.recycle.repository.RecycleRepository;
 
@@ -20,11 +19,11 @@ public class RecycleService {
     public List<Recycle> getAllRecycles() {
         return recycleRepository.findAll();
     }
-    public Recycle getRecycleByName(String name) {
-        return recycleRepository.findByName(name);
+    public Recycle getRecycleByName(String recycleName) {
+        return recycleRepository.findByName(recycleName);
     }
-    public Recycle getRecycleById(Long id) {
-        return recycleRepository.findById(id).orElseThrow(()->new IllegalArgumentException("[Error]"));
+    public Recycle getRecycleById(Long recycleId) {
+        return recycleRepository.findById(recycleId).orElseThrow(()->new IllegalArgumentException("[Error]"));
     }
     public Recycle updateImageUrl(Long recycleId, String imageUrl) {
         Recycle recycle = getRecycleById(recycleId);

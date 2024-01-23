@@ -10,22 +10,22 @@ public class TagDtos {
 
     @Getter
     public static class TagResponseDto {
-        private final Long id;
-        private final String name;
+        private final Long tagId;
+        private final String tagName;
         public TagResponseDto(Tag tag){
-            this.id = tag.getId();
-            this.name = tag.getName();
+            this.tagId = tag.getId();
+            this.tagName = tag.getName();
         }
     }
 
     @Getter
     public static class TagRequestDto {
-        private String name;
-        public Tag toEntity() { return new Tag(name);}
+        private String tagName;
+        public Tag toEntity() { return new Tag(tagName);}
     }
 
     @Getter
     public static class TagUpdateNameRequestDto{
-        private String name;
+        private String tagName;
     }
 }
