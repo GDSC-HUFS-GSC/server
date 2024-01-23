@@ -14,7 +14,6 @@ import java.util.List;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Getter
-@Setter
 @Entity
 public class Type {
     @Id
@@ -27,7 +26,7 @@ public class Type {
     private String name;
 
     @Column(name = "type_image_url")
-    private String img;
+    private String imageUrl;
 
     @Column(name = "how")
     private String how;
@@ -43,4 +42,11 @@ public class Type {
     @OneToMany(mappedBy = "type", cascade = CascadeType.PERSIST)
     private List<TypeTag> typeTag = new ArrayList<>();
 
+    public void updateName(String newName) {
+        this.name = newName;
+    }
+
+    public void updateImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
