@@ -2,7 +2,9 @@ package solution.server.type.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import solution.server.category.model.Category;
 import solution.server.item.model.Item;
@@ -15,6 +17,7 @@ import java.util.List;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Type {
     @Id
@@ -46,24 +49,40 @@ public class Type {
     @OneToMany(mappedBy = "type", cascade = CascadeType.PERSIST)
     private List<Item> items = new ArrayList<>();
 
-    public void updateName(String newName) {
+    public Type(String typeName, String typeImageUrl,String how) {
+        checkTypeName(typeName);
+        this.name = typeName;
+        this.imageUrl = typeImageUrl;
+        this.how = how;
+    }
+
+    private void checkTypeName(String typeName) {
+        if(typeName.length() > 100 ) throw new IllegalArgumentException("[Error] Wrong Size");
+    }
+
+    public Type updateName(String newName) {
         this.name = newName;
+        return this;
     }
 
-    public void updateHow(String how) {
+    public Type updateHow(String how) {
         this.name = how;
+        return this;
     }
 
-    public void updateImageUrl(String imageUrl) {
+    public Type updateImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
-    public void updateCategory(Category category) {
+    public Type updateCategory(Category category) {
         this.category = category;
+        return this;
     }
 
-    public void updateRecycle(Recycle recycle) {
+    public Type updateRecycle(Recycle recycle) {
         this.recycle = recycle;
+        return this;
     }
 
     public List<String> getHashTags() {
@@ -75,5 +94,11 @@ public class Type {
     }
     public String getRecycleName() {
         return recycle.getName();
+    }
+
+    public Type addInfo(Recycle recycle, Category category) {
+        this.recycle = recycle;
+        this.category = category;
+        return this;
     }
 }

@@ -16,6 +16,7 @@ import solution.server.global.file.domain.application.ImageFileService;
 import solution.server.type.application.TypeService;
 import solution.server.type.dto.TypeDtos.TypeRequestDto;
 import solution.server.type.dto.TypeDtos.TypeResponseDto;
+import solution.server.type.dto.TypeDtos.TypeUpdateNameRequestDto;
 
 @RestController
 @RequestMapping(value = "/v1/type")
@@ -38,20 +39,20 @@ public class TypeController {
 
     @PostMapping(value = "", produces = "application/json;charset=UTF-8")
     public ApiResponse<TypeResponseDto> addNewType(@RequestBody TypeRequestDto request) {
-        return ApiResponse.success(new TypeResponseDto(typeService.addNewType(request.toEntity())));
+        return ApiResponse.success(new TypeResponseDto(typeService.addNewType(request.toEntity(),request.getRecycleName(),request.getCategoryName())));
     }
 
     @PutMapping(value = "/image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ApiResponse<TypeResponseDto> updateTypeImageUrl(@RequestParam("typeId") Long typeId, @RequestParam("file") MultipartFile file) {
+    public ApiResponse<TypeResponseDto> updateTypeImageUrl(@RequestParam("typeName") String typeName, @RequestParam("file") MultipartFile file) {
         String imageUrl = imageFileService.uploadImageFile(file, "Type");
-        var type = typeService.updateImageUrl(typeId, imageUrl);
+        var type = typeService.updateImageByName(typeName, imageUrl);
         return ApiResponse.success(new TypeResponseDto(type));
     }
 
     @PutMapping(value = "/name")
-    public ApiResponse<TypeResponseDto> updateTypeName(@RequestParam("typeId") Long typeId,
+    public ApiResponse<TypeResponseDto> updateTypeName(@RequestParam("typeName") String typeName,
                                                        @RequestBody TypeUpdateNameRequestDto request) {
-        var type = typeService.updateTypeName(typeId, request.getName());
+        var type = typeService.updateTypeName(typeName, request.getTypeName());
         return ApiResponse.success(new TypeResponseDto(type));
     }
 

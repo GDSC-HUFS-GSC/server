@@ -3,7 +3,6 @@ package solution.server.recycle.application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import solution.server.item.model.Item;
 import solution.server.recycle.model.Recycle;
 import solution.server.recycle.repository.RecycleRepository;
 
@@ -29,7 +28,6 @@ public class RecycleService {
     public Recycle updateImageUrl(Long recycleId, String imageUrl) {
         Recycle recycle = getRecycleById(recycleId);
         recycle.updateImageUrl(imageUrl);
-        //recycleRepository.save(recycle);
         return recycle;
     }
     public Recycle updateRecycleName(Long recycleId, String newName) {

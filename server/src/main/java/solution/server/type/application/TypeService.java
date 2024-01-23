@@ -37,12 +37,13 @@ public class TypeService {
         return typeRepository.findById(id).orElseThrow(()->new IllegalStateException("[ERROR]"));
     }
 
-    public Type addNewType(String name) {
-        Type type = new Type();
-        type.updateName(name);
+    public Type addNewType(Type type,String recycleName,String categoryName) {
+        var recycle = recycleService.getRecycleByName(recycleName);
+        var category = categoryService.getCategoryByName(categoryName);
+        type.addInfo(recycle,category);
+        typeRepository.save(type);
         return type;
     }
-
 
     public Type updateHowByName(String typeName, String how) {
         Type type = getTypeByName(typeName);

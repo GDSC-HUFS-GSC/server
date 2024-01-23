@@ -44,7 +44,7 @@ public class RecycleController {
     @PutMapping(value = "/name")
     public ApiResponse<RecycleResponseDto> updateRecycleName(@RequestParam("recycleId") Long recycleId,
                                                              @RequestBody RecycleUpdateNameRequestDto request) {
-        var recycle = recycleService.updateRecycleName(recycleId,request.getName());
+        var recycle = recycleService.updateRecycleName(recycleId,request.getRecycleName());
         return ApiResponse.success(new RecycleResponseDto(recycle));
     }
 
