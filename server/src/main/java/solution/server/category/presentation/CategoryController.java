@@ -20,8 +20,13 @@ public class CategoryController {
 
     private final CategoryService categoryService;
     private final ImageFileService imageFileService;
-
     @GetMapping(value = "", produces = "application/json;charset=UTF-8")
+    public ApiResponse<CategoryResponseDto> getResultDetailInfo(@RequestParam String name) {
+        var category = new CategoryResponseDto(categoryService.getItemListByCategoryName(name));
+        return ApiResponse.success(category);
+    }
+
+    @GetMapping(value = "/name", produces = "application/json;charset=UTF-8")
     public ApiResponse<CategoryResponseDto> getCategoryDetailInfo(@RequestParam String name) {
         var category = new CategoryResponseDto(categoryService.getCategoryByName(name));
         return ApiResponse.success(category);
