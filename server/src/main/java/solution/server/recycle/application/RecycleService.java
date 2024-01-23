@@ -19,11 +19,11 @@ public class RecycleService {
     public List<Recycle> getAllRecycles() {
         return recycleRepository.findAll();
     }
-    public Recycle getRecycleByName(String name) {
-        return recycleRepository.findByName(name);
+    public Recycle getRecycleByName(String recycleName) {
+        return recycleRepository.findByName(recycleName);
     }
-    public Recycle getRecycleById(Long id) {
-        return recycleRepository.findById(id).orElseThrow(()->new IllegalArgumentException("[Error]"));
+    public Recycle getRecycleById(Long recycleId) {
+        return recycleRepository.findById(recycleId).orElseThrow(()->new IllegalArgumentException("[Error]"));
     }
     public Recycle updateImageUrl(Long recycleId, String imageUrl) {
         Recycle recycle = getRecycleById(recycleId);
@@ -33,7 +33,6 @@ public class RecycleService {
     public Recycle updateRecycleName(Long recycleId, String newName) {
         Recycle recycle = getRecycleById(recycleId);
         recycle.updateName(newName);
-        recycleRepository.save(recycle);
         return recycle;
     }
     public void deleteRecycle(String name) {
