@@ -1,27 +1,45 @@
 package solution.server.type.dto;
 
+import java.util.List;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import solution.server.type.model.Type;
 
 public class TypeDtos {
 
-/*    @Getter
-    public static class TypeResponseDto{
+ @Getter
+    public static class TypeResponseDto {
+        private final Long typeId;
+        private final String typeName;
+        private final String typeHow;
+        private final String typeImageUrl;
+        private final String categoryName;
+        private final String recycleName;
+        private final List<String> hashTagNames;
+
+        public TypeResponseDto(Type type){
+            this.typeId = type.getId();
+            this.typeName = type.getName();
+            this.categoryName = type.getCategoryName();
+            this.recycleName = type.getRecycleName();
+            this.typeHow = type.getHow();
+            this.typeImageUrl = type.getImageUrl();
+            this.hashTagNames = type.getHashTags();
+        }
+    }
+    @Getter
+    public static class TypeRequestDto {
         private String typeName;
+        private String typeImageUrl;
+        private String typeHow;
         private String categoryName;
         private String recycleName;
-        private String tagName;
-        private String typeHow;
-        private String typeImageUrl;
-        public TypeResponseDto(Type type){
-            this.typeName = type.getName();
-            this.categoryName = type.getCategory().getName();
-            this.recycleName = type.getRecycle().getName();
-            this.tagName = type.getTag().getName();
-            this.typeHow = type.getHow();
-            this.typeImageUrl = type.getImg();
+
+        public Type toEntity() {
+            return new Type(typeName,typeImageUrl,typeHow) ;
         }
-    }*/
+    }
+    @Getter
+    public static class TypeUpdateNameRequestDto {
+        private String typeName;
+    }
 }
