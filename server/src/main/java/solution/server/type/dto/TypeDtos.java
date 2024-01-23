@@ -1,27 +1,38 @@
 package solution.server.type.dto;
 
+import java.util.List;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import solution.server.type.model.Type;
 
 public class TypeDtos {
 
-/*    @Getter
-    public static class TypeResponseDto{
-        private String typeName;
-        private String categoryName;
-        private String recycleName;
-        private String tagName;
-        private String typeHow;
-        private String typeImageUrl;
+ @Getter
+    public static class TypeResponseDto {
+        private final Long typeId;
+        private final String typeName;
+        private final String typeHow;
+        private final String typeImageUrl;
+        private final String categoryName;
+        private final String recycleName;
+        private final List<String> hashTags;
+
         public TypeResponseDto(Type type){
+            this.typeId = type.getId();
             this.typeName = type.getName();
-            this.categoryName = type.getCategory().getName();
-            this.recycleName = type.getRecycle().getName();
-            this.tagName = type.getTag().getName();
+            this.categoryName = type.getCategoryName();
+            this.recycleName = type.getRecycleName();
             this.typeHow = type.getHow();
-            this.typeImageUrl = type.getImg();
+            this.typeImageUrl = type.getImageUrl();
+            this.hashTags = type.getHashTags();
         }
-    }*/
+    }
+    @Getter
+    public static class TypeRequestDto {
+        private String name;
+        private String imageUrl;
+
+        public Type toEntity() {
+            return new Type() ;
+        }
+    }
 }

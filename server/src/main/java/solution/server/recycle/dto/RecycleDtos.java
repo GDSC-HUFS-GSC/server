@@ -7,25 +7,25 @@ public class RecycleDtos {
 
     @Getter
     public static class RecycleResponseDto {
-        private final Long id;
-        private final String name;
-        private final String imageUrl;
+        private final Long recycleId;
+        private final String recycleName;
+        private final String recycleImageUrl;
         public RecycleResponseDto(Recycle recycle) {
-            this.id = recycle.getId();
-            this.name = recycle.getName();
-            this.imageUrl = recycle.getImageUrl();
+            this.recycleId = recycle.getId();
+            this.recycleName = recycle.getName();
+            this.recycleImageUrl = recycle.getImageUrl();
         }
     }
     @Getter
     public static class RecycleRequestDto {
-        private String name;
-        private String imageUrl;
+        private String recycleName;
+        private String recycleImageUrl;
         public Recycle toEntity() {
-            return new Recycle(name,imageUrl);
+            return new Recycle(recycleName,recycleImageUrl);
         }
     }
     @Getter
     public static class RecycleUpdateNameRequestDto {
-        private String name;
+        private String recycleName;
     }
 }
