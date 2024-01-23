@@ -35,7 +35,6 @@ public class CategoryService {
     public Category updateImageUrl(Long categoryId, String imageUrl){
         Category category = getCategoryById(categoryId);
         category.updateImageUrl(imageUrl);
-        //categoryRepository.save(category);
         return category;
     }
 
@@ -43,7 +42,6 @@ public class CategoryService {
     public Category updateCategoryName(Long categoryId, String newName){
         Category category = getCategoryById(categoryId);
         category.updateName(newName);
-        categoryRepository.save(category);
         return category;
     }
 

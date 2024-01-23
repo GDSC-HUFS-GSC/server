@@ -34,7 +34,6 @@ public class RecycleService {
     public Recycle updateRecycleName(Long recycleId, String newName) {
         Recycle recycle = getRecycleById(recycleId);
         recycle.updateName(newName);
-        recycleRepository.save(recycle);
         return recycle;
     }
     public void deleteRecycle(String name) {
