@@ -1,5 +1,6 @@
 package solution.server.type.application;
 
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +9,7 @@ import solution.server.category.model.Category;
 
 import solution.server.recycle.application.RecycleService;
 import solution.server.recycle.model.Recycle;
+import solution.server.type.dto.TypeDtos.TypeResponseDto;
 import solution.server.type.model.Type;
 import solution.server.type.repository.TypeRepository;
 
@@ -26,7 +28,6 @@ public class TypeService {
         Category category = type.getCategory();
         return category.getName();
     }
-
     public List<Type> getAllTypes() {
         return typeRepository.findAll();
     }
@@ -78,5 +79,10 @@ public class TypeService {
         Recycle recycle = recycleService.getRecycleByName(recycleName);
         type.updateRecycle(recycle);
         return type;
+    }
+
+    public List<TypeResponseDto> getItemListByCategoryName(String name) {
+        Category category =  categoryService.getCategoryByName(name);
+        return typeRepository.findAByCategory(category).stream().map(TypeResponseDto::new).toList();
     }
 }
