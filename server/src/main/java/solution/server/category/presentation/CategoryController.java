@@ -25,7 +25,7 @@ public class CategoryController {
     private final ImageFileService imageFileService;
     @GetMapping(value = "", produces = "application/json;charset=UTF-8")
     public ApiResponse<List<TypeResponseDto>> getResultDetailInfo(@RequestParam String name) {
-        var category = typeService.getItemListByCategoryName(name);
+        var category = typeService.getTypeListByCategoryName(name);
         return ApiResponse.success(category);
     }
 

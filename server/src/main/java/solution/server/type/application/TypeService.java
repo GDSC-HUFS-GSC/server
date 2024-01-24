@@ -81,7 +81,7 @@ public class TypeService {
         return type;
     }
 
-    public List<TypeResponseDto> getItemListByCategoryName(String name) {
+    public List<TypeResponseDto> getTypeListByCategoryName(String name) {
         Category category =  categoryService.getCategoryByName(name);
         return typeRepository.findAByCategory(category).stream().map(TypeResponseDto::new).toList();
     }
