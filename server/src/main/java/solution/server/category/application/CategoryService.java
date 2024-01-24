@@ -1,5 +1,6 @@
 package solution.server.category.application;
 
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,12 +8,14 @@ import solution.server.category.model.Category;
 import solution.server.category.repository.CategoryRepository;
 
 import java.util.List;
+import solution.server.type.application.TypeService;
 
 @Transactional
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
     private final CategoryRepository categoryRepository;
+    private final TypeService typeService;
 
     public Category addNewCategory(Category category){
         categoryRepository.save(category);
@@ -42,5 +45,11 @@ public class CategoryService {
     public void deleteCategory(String name){
         Category category = getCategoryByName(name);
         categoryRepository.delete(category);
+    }
+
+    public Category getItemListByCategoryName(String name) {
+        Category category =  getCategoryByName(name);
+        List<Objects> var = typeService.getSearchResultByCategoryId(category.getId());
+        return var;
     }
 }
