@@ -12,17 +12,20 @@ import solution.server.global.common.dto.ApiResponse;
 import solution.server.global.file.domain.application.ImageFileService;
 
 import java.util.List;
+import solution.server.type.application.TypeService;
+import solution.server.type.dto.TypeDtos.TypeResponseDto;
 
 @RestController
 @RequestMapping(value = "/v1/category")
 @RequiredArgsConstructor
 public class CategoryController {
 
+    private final TypeService typeService;
     private final CategoryService categoryService;
     private final ImageFileService imageFileService;
     @GetMapping(value = "", produces = "application/json;charset=UTF-8")
-    public ApiResponse<CategoryResponseDto> getResultDetailInfo(@RequestParam String name) {
-        var category = new CategoryResponseDto(categoryService.getItemListByCategoryName(name));
+    public ApiResponse<List<TypeResponseDto>> getResultDetailInfo(@RequestParam String name) {
+        var category = typeService.getTypeListByCategoryName(name);
         return ApiResponse.success(category);
     }
 
