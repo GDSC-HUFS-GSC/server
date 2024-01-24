@@ -3,7 +3,6 @@ package solution.server.tag.presentation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import solution.server.global.common.dto.ApiResponse;
-import solution.server.recycle.dto.RecycleDtos;
 import solution.server.tag.application.TagService;
 import solution.server.tag.dto.TagDtos;
 
@@ -30,7 +29,7 @@ public class TagController {
     @PutMapping(value = "/name")
     public ApiResponse<TagDtos.TagResponseDto> updateTagName(@RequestParam("tagId") Long tagId,
                                                                      @RequestBody TagDtos.TagUpdateNameRequestDto request) {
-        var tag = tagService.updateTagName(tagId, request.getName());
+        var tag = tagService.updateTagName(tagId, request.getTagName());
         return ApiResponse.success(new TagDtos.TagResponseDto(tag));
     }
 
