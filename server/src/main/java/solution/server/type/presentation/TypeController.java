@@ -28,13 +28,11 @@ public class TypeController {
 
     @GetMapping(value = "", produces = "application/json;charset=UTF-8")
     public ApiResponse<TypeResponseDto> getTypeDetailInfo(@RequestParam Long id) {
-        var type = new TypeResponseDto(typeService.getTypeById(id));
-        return ApiResponse.success(type);
+        return ApiResponse.success(typeService.getTypeResponseById(id));
     }
     @GetMapping(value = "/name", produces = "application/json;charset=UTF-8")
     public ApiResponse<TypeResponseDto> getTypeDetailInfoByName(@RequestParam String name) {
-        var type = new TypeResponseDto(typeService.getTypeByName(name));
-        return ApiResponse.success(type);
+        return ApiResponse.success(typeService.getTypeResponseByName(name));
     }
 
     @PostMapping(value = "", produces = "application/json;charset=UTF-8")
@@ -45,20 +43,17 @@ public class TypeController {
     @PutMapping(value = "/image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ApiResponse<TypeResponseDto> updateTypeImageUrl(@RequestParam("typeName") String typeName, @RequestParam("file") MultipartFile file) {
         String imageUrl = imageFileService.uploadImageFile(file, "Type");
-        var type = typeService.updateImageByName(typeName, imageUrl);
-        return ApiResponse.success(new TypeResponseDto(type));
+        return ApiResponse.success(typeService.updateImageByName(typeName, imageUrl));
     }
 
     @PutMapping(value = "/name")
     public ApiResponse<TypeResponseDto> updateTypeName(@RequestParam("typeName") String typeName,
                                                        @RequestBody TypeUpdateNameRequestDto request) {
-        var type = typeService.updateTypeName(typeName, request.getTypeName());
-        return ApiResponse.success(new TypeResponseDto(type));
+        return ApiResponse.success(typeService.updateTypeName(typeName, request.getTypeName()));
     }
 
     @GetMapping(value = "/all", produces = "application/json;charset=UTF-8")
     public ApiResponse<List<TypeResponseDto>> getAllTypes() {
-        List<TypeResponseDto> itemDetailResponse = typeService.getAllTypes().stream().map(TypeResponseDto::new).toList();
-        return ApiResponse.success(itemDetailResponse);
+        return ApiResponse.success(typeService.getAllTypeResponse());
     }
 }

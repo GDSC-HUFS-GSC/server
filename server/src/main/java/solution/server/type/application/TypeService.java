@@ -1,6 +1,5 @@
 package solution.server.type.application;
 
-import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,44 +22,61 @@ public class TypeService {
     private final TypeRepository typeRepository;
     private final RecycleService recycleService;
     private final CategoryService categoryService;
+
     public String getCategoryNameByName(String typeName) {
         Type type = typeRepository.findByName(typeName);
         Category category = type.getCategory();
         return category.getName();
     }
+
     public List<Type> getAllTypes() {
         return typeRepository.findAll();
     }
+
+    public List<TypeResponseDto> getAllTypeResponse() {
+        return getAllTypes().stream().map(TypeResponseDto::new).toList();
+    }
+
     public Type getTypeByName(String name) {
         return typeRepository.findByName(name);
     }
-    public Type getTypeById(Long id) {
-        return typeRepository.findById(id).orElseThrow(()->new IllegalStateException("[ERROR]"));
+
+    public TypeResponseDto getTypeResponseById(Long id) {
+        return new TypeResponseDto(getTypeById(id));
     }
 
-    public Type addNewType(Type type,String recycleName,String categoryName) {
+    public TypeResponseDto getTypeResponseByName(String name) {
+        return new TypeResponseDto(getTypeByName(name));
+    }
+
+    public Type getTypeById(Long id) {
+        return typeRepository.findById(id).orElseThrow(() -> new IllegalStateException("[ERROR]"));
+    }
+
+    public Type addNewType(Type type, String recycleName, String categoryName) {
         var recycle = recycleService.getRecycleByName(recycleName);
         var category = categoryService.getCategoryByName(categoryName);
-        type.addInfo(recycle,category);
+        type.addInfo(recycle, category);
         typeRepository.save(type);
         return type;
     }
 
-    public Type updateHowByName(String typeName, String how) {
+    public TypeResponseDto updateHowByName(String typeName, String how) {
         Type type = getTypeByName(typeName);
         type.updateHow(how);
-        return type;
+        return new TypeResponseDto(type);
     }
 
-    public Type updateImageByName(String typeName, String imgUrl) {
+    public TypeResponseDto updateImageByName(String typeName, String imgUrl) {
         Type type = getTypeByName(typeName);
         type.updateImageUrl(imgUrl);
-        return type;
+        return new TypeResponseDto(type);
     }
-    public Type updateTypeName(String typeName, String newName) {
+
+    public TypeResponseDto updateTypeName(String typeName, String newName) {
         Type type = getTypeByName(typeName);
         type.updateName(newName);
-        return type;
+        return new TypeResponseDto(type);
     }
 
     public void deleteType(String typeName) {
@@ -68,21 +84,22 @@ public class TypeService {
         typeRepository.delete(type);
     }
 
-    public Type updateCategoryByName(String typeName, String categoryName) {
+    public TypeResponseDto updateCategoryByName(String typeName, String categoryName) {
         Type type = getTypeByName(typeName);
         Category category = categoryService.getCategoryByName(categoryName);
         type.updateCategory(category);
-        return type;
+        return new TypeResponseDto(type);
     }
-    public Type updateRecycleByName(String typeName, String recycleName) {
+
+    public TypeResponseDto updateRecycleByName(String typeName, String recycleName) {
         Type type = getTypeByName(typeName);
         Recycle recycle = recycleService.getRecycleByName(recycleName);
         type.updateRecycle(recycle);
-        return type;
+        return new TypeResponseDto(type);
     }
 
     public List<TypeResponseDto> getTypeListByCategoryName(String name) {
-        Category category =  categoryService.getCategoryByName(name);
+        Category category = categoryService.getCategoryByName(name);
         return typeRepository.findAByCategory(category).stream().map(TypeResponseDto::new).toList();
     }
 }
